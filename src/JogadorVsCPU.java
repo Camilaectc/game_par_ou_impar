@@ -8,7 +8,7 @@ import java.util.Random;
 public class JogadorVsCPU {
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("IP", 8080); // IP e porta do servidor
+            Socket socket = new Socket("IP", 8080); // informe IP e porta do servidor
 
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

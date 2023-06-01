@@ -8,7 +8,7 @@ import java.net.Socket;
 public class Servidor {
     public static void main(String[] args) {
         try {
-            ServerSocket serverSocket = new ServerSocket(8080);
+            ServerSocket serverSocket = new ServerSocket(8080); //informe a porta onde o servidor esta sendo carregado
             System.out.println("Aguardando a conexao do Jogador 1...");
             Socket jogador1Socket = serverSocket.accept();
             System.out.println("Jogador 1 conectado.");

@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Jogador {
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("192.168.15.11", 8080);
+            Socket socket = new Socket("IP", 8080);  // informe IP e porta do servidor
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
