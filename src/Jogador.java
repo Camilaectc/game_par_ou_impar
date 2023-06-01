@@ -11,34 +11,49 @@ public class Jogador {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
+            BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+
             System.out.println("Bem-vindo ao jogo Par ou Impar! Digite 'sair' para encerrar.");
 
             int rodada = 1;
+
+
             while (rodada <= 3) {
                 String mensagemServidor = in.readLine();
                 System.out.println(mensagemServidor);
 
-                String perguntaParImpar = in.readLine();
-                System.out.println(perguntaParImpar);
-                System.out.println("Escolha um numero de 0 a 5:");
-                String escolha = System.console().readLine();
+                if (mensagemServidor.equals("Voce escolhe 'par' ou 'impar'?")) {
+                    System.out.println("Escolha 'par' ou 'impar':");
+                    String escolhaParImpar = consoleReader.readLine();
+                    out.println(escolhaParImpar);
+                } else if (mensagemServidor.startsWith("Jogador")) {
+                    System.out.println(mensagemServidor);
+                    System.out.println("Escolha um numero de 0 a 5:");
+                    String escolha = consoleReader.readLine();
 
-                if (escolha.equals("sair")) {
-                    break;
+                    if (escolha.equals("sair")) {
+                        out.println(escolha);
+                        break;
+                    }
+
+                    int numero = Integer.parseInt(escolha);
+                    System.out.println("Voce escolheu: " + numero);
+
+                    out.println(numero);
+                    String confirmacao = in.readLine();
+                    System.out.println(confirmacao);
+
+                } else if (mensagemServidor.startsWith("Resultado:")) {
+                    // Exibir o resultado da rodada
+                    System.out.println(mensagemServidor);
+                } else if (mensagemServidor.startsWith("Vencedor:")) {
+                    // Exibir o vencedor da rodada
+                    System.out.println(mensagemServidor);
+                } else if (mensagemServidor.equals("Fim do jogo!")) {
+
+                    rodada++;
                 }
 
-                int numero = Integer.parseInt(escolha);
-                System.out.println("Você escolheu: " + numero);
-
-                out.println(numero);
-
-                String resultado = in.readLine();
-                System.out.println("Resultado: " + resultado);
-
-                String vencedor = in.readLine();
-                System.out.println("Vencedor: " + vencedor);
-
-                rodada++;
             }
 
             String mensagemFimJogo = in.readLine();
@@ -49,7 +64,6 @@ public class Jogador {
 
             String mensagemDerrotas = in.readLine();
             System.out.println(mensagemDerrotas);
-
 
             socket.close();
         } catch (IOException e) {

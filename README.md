@@ -85,3 +85,4 @@ Contribuições são bem-vindas! Se você tiver sugestões, melhorias ou correç
 - Gean Lucas de Souza Lima RA: 125111359133
 - Paloma Aparecida dos Santos Silva RA: 125111375946
 - Bruno Marcomini Gimenes Pereira RA: 125111348740
+- Jhonatan Gomes Lopes RA: 125111374844 

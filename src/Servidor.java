@@ -8,7 +8,7 @@ import java.net.Socket;
 public class Servidor {
     public static void main(String[] args) {
         try {
-            ServerSocket serverSocket = new ServerSocket(8080); //informe a porta onde o servidor esta sendo carregado
+            ServerSocket serverSocket = new ServerSocket(8080); //informe a porta onde o servidor está sendo carregado
             System.out.println("Aguardando a conexao do Jogador 1...");
             Socket jogador1Socket = serverSocket.accept();
             System.out.println("Jogador 1 conectado.");
@@ -30,17 +30,29 @@ public class Servidor {
             while (rodada <= 3) {
                 System.out.println("Rodada " + rodada);
 
-                jogador1Out.println("Voce escolhe par ou impar?");
+                jogador1Out.println("Voce escolhe 'par' ou 'impar'?");
                 String jogador1ParImpar = jogador1In.readLine();
-                jogador1Out.println("Jogador 1: Escolha um numero de 0 a 5.");
-                int jogador1Escolha = Integer.parseInt(jogador1In.readLine());
-                System.out.println("Jogador 1 escolheu: " +jogador1ParImpar + " " + jogador1Escolha);
+                System.out.println("Jogador 1 escolheu: " + jogador1ParImpar);
 
                 jogador2Out.println("Voce escolhe 'par' ou 'impar'?");
                 String jogador2ParImpar = jogador2In.readLine();
+                System.out.println("Jogador 2 escolheu: " + jogador2ParImpar);
+
+                if (jogador1ParImpar.equalsIgnoreCase(jogador2ParImpar)) {
+                    jogador1Out.println("Opção invalida. Escolha diferente de " + jogador2ParImpar);
+                    jogador2Out.println("Opção invalida. Escolha diferente de " + jogador1ParImpar);
+                    continue;
+                }
+
+                jogador1Out.println("Jogador 1: Escolha um numero de 0 a 5.");
+                String jogador1EscolhaStr = jogador1In.readLine();
+                int jogador1Escolha = Integer.parseInt(jogador1EscolhaStr);
+                System.out.println("Jogador 1 escolheu: " + jogador1Escolha);
+
                 jogador2Out.println("Jogador 2: Escolha um numero de 0 a 5.");
-                int jogador2Escolha = Integer.parseInt(jogador2In.readLine());
-                System.out.println("Jogador 2 escolheu: " + jogador2ParImpar + " " + jogador2Escolha);
+                String jogador2EscolhaStr = jogador2In.readLine();
+                int jogador2Escolha = Integer.parseInt(jogador2EscolhaStr);
+                System.out.println("Jogador 2 escolheu: " + jogador2Escolha);
 
                 int soma = jogador1Escolha + jogador2Escolha;
                 System.out.println("A soma dos numeros e: " + soma);
@@ -49,11 +61,11 @@ public class Servidor {
                 System.out.println("Resultado: " + resultado);
 
                 String vencedor;
-                if ((jogador1Escolha % 2 == 0 && resultado.equals("par")) || (jogador1Escolha % 2 != 0 && resultado.equals("impar"))) {
+                if ((jogador1Escolha % 2 == 0 && resultado.equals("par"))
+                        || (jogador1Escolha % 2 != 0 && resultado.equals("impar"))) {
                     vencedor = "Jogador 1";
                     vitoriasJogador1++;
-                }
-                else {
+                } else {
                     vencedor = "Jogador 2";
                     vitoriasJogador2++;
                 }
@@ -69,13 +81,12 @@ public class Servidor {
             }
 
             jogador1Out.println("Fim do jogo!");
-            jogador1Out.println("Número de vitorias do Jogador 1: " + vitoriasJogador1);
-            jogador1Out.println("Número de derrotas do Jogador 1: " + vitoriasJogador2);
+            jogador1Out.println("Numero de vitorias do Jogador 1: " + vitoriasJogador1);
+            jogador1Out.println("Numero de derrotas do Jogador 1: " + vitoriasJogador2);
 
             jogador2Out.println("Fim do jogo!");
-            jogador2Out.println("Número de vitorias do Jogador 2: " + vitoriasJogador2);
-            jogador2Out.println("Número de derrotas do Jogador 2: " + vitoriasJogador1);
-
+            jogador2Out.println("Numero de vitorias do Jogador 2: " + vitoriasJogador2);
+            jogador2Out.println("Numero de derrotas do Jogador 2: " + vitoriasJogador1);
 
             jogador1Socket.close();
             jogador2Socket.close();
